@@ -1,6 +1,8 @@
 #! /usr/bin/env python
 
-from flask import Flask, render_template
+from datetime import datetime
+
+from flask import Flask, render_template, make_response
 
 from config import CONF
 
@@ -11,9 +13,13 @@ app.secret_key = CONF.SECRET_KEY
 
 @app.route('/')
 def index():
-    return render_template(
+    template = render_template(
         'index.html',
+        _=datetime.now().isoformat(),
     )
+    response = make_response(template)
+    response.cache_control.max_age = 300
+    return response
 
 
 if __name__ == '__main__':

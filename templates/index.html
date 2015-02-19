@@ -1,17 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="static/style.css" rel="stylesheet">
-    <script src="static/vendor/jquery-2.1.1.min.js"></script>
-</head>
-<body>
-    Talk
-</body>
+
+<title>Talk</title>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link href="static/css/style.css?_={{ _ }}" rel="stylesheet">
+<script type="text/javascript" src="static/vendor/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="static/vendor/underscore.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 <script type="text/javascript">
-
-$(document).ready(function(){
-    console.log('this does nothing yet');
-});
-
+  window.HOST = document.location.origin;
 </script>
+
+</head>
+
+<body>
+
+<header class="navbar navbar-fixed-top navbar-default" id="top" role="banner">
+  <div class="container">
+
+    <div class="navbar-header">
+      <a href="/" class="navbar-brand">
+        <span class="navbar-logo">Talk</span>
+      </a>
+    </div>
+
+
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="/">Button</a>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+
+<div id="target"></div>
+
+<script type="text/javascript" src="static/app.js?_={{ _ }}"></script>
+
+{% include "templates.html" %}
+
+</body>
 </html>
