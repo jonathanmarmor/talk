@@ -2,7 +2,7 @@
 
 from datetime import datetime
 
-from flask import Flask, render_template, make_response
+from flask import Flask, render_template, make_response, jsonify
 
 from config import CONF
 

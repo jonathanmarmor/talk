@@ -1,0 +1,113 @@
+02-03-04
+
+- although performance recent, music not new: 10 years
+- original title 2-3-4, February 3rd, 2004
+- a few weekends ago I was moving some files to a new harddrive and saw the score for this music and realized Feb 3, 2014 was coming up
+- recordings & code lost
+- re-implemented it, shot out email "stay after work, make an informal recording?"
+
+# What is algorithmic music composition and why does Jonathan do it?
+- some of the music I make is "algorithmic music"
+- for me, this means: some sort of logical, deterministic process, or random, statistical process used to generate compositions
+- one could argue all music has a latent generative model, but that's silly
+- sometimes I think of this style as experimental simulations of music, but most of the time it's just a tool I use to make regular music
+- computers not necessary, but easier
+- this music similar to music I made before using computers
+- grad school, James Tenney (early music researcher Bell labs), encouraged me to automate my composition process with computers, like he did
+- In 2000 and I've never gone back, at least for primary chamber music composition style
+- Lots of people make algorithmic music, popular in music schools, practiced by prominent composers going back at least to the 1940's
+- many approaches, but for me:
+- each new piece is a new experiment with a contrived set of rules about how music works
+- new model of what music is. a new mini genre
+- my goal generally is to set up new systems of expectations then break them
+- hopefully resulting in expressive music that causes personal transformations for listeners
+
+# Goals of this music
+- performance is a social game played by the musicians
+- can be played in an impromptu fashion by whoever is present
+- duration and instrumentation is open
+- only specialized knowledge of music required is finding pitches on your instrument by name
+- musician who knows rules can play any version on the fly
+- no content to learn, just rules of how to realize any version of the score
+- musicians can rush through a boring part of wait a while if something nice is happening
+
+- set up environment: easy to listen to the sounds of the music itself
+- no musical material (like melodies) to distract you
+- not listening for meaning, listening to surface of sound
+- like listening to speech in a language you don't understand
+- environment frames sounds:
+- slow moving consonant functional harmony, unexpected harmonic changes you can feel
+- rhythmic periodicity, but not as fast or precise as most music:
+- at least as slow and imprecise as breathing
+- variety of textures to listen to:
+- balance between layered textures, instruments blend together, and transparent textures, you get to hear individual notes' ASDR
+- rhythmic subtlety, as sometimes heard in free improvisation
+- layered instrumental textures inspired by the pianos and organs in Bob Dylan and The Band, but drawn out and exposed
+
+(show score)
+# How the music works
+- the score is a list of sequential events
+- each event is a change of state, some people start playing, others stop
+- performers changing in an event collectively decide when to change
+- look around, eye contact, when all willing, they cue each other and make the change
+
+- when you have notes to play, how do you play them?
+- play all the pitches listed as one chord
+- voice the chord however you want
+- pick a voicing, play all notes together for duration of a breath or natural decay, pause, repeat exactly, keep doing it until 'stop' event
+- slow enough: no pulse or rhythm
+- frequently enough that it would be noticable if it stopped
+- like when refrigerator turns off in another room: suddenly hear everything around you more clearly
+- results in texture in which the different periods of each performer's part make notes sometimes happens simultaneously and sometimes happens individually
+- when performers enter and exit the texture and harmony changes
+- it's a puzzle: with randomly sequenced entrances and exits how can we ensure that the harmony resulting from all sounding parts is always one of the allowed harmony types?
+- the harmony types used are a short list of common chord types ranked by consonance, as judged by me, but mostly in agreement with this David Huron paper which is based on real human tests of perceived consonance of diads
+
+# How the code works
+- lost the original code that generated it (2004, python 2.2 or 2.3?), and I can't remember how it worked
+- Made 2.5 implementations a few weekends ago. All but one could never solve the puzzle.
+- I usually try to take a top-down, instead of left-to-right approach
+- Form first: large timescale decisions first, gradually moving down into details
+- Not chronologically, note by note
+- Easier to satisfy my goals that way
+- Couldn't get top down to work
+- Painted into unsolvable corners that were hard to back out of
+- used left to right
+- left to right approach has slightly different statistical properties: it's less likely for a note to be really really really long. too bad.
+
+- takes a config file lists instruments
+- new version for new instruments can be made instantly
+- set the number of events we want to generate
+- starts with state of all musicians set to 'not playing'
+- while we have fewer than the desired number of events, try to make a new event
+- take all instruments' state as input and output a new state
+- randomly pick a number of instruments that will change
+- if a changing instrument is already playing, their action will be 'stop'
+- if a changing instrument is not playing choose pitches for them to play
+- picking pitches is tricky:
+- look at pitches held over from the previous state
+- find list of allowed harmonies made up of held over pitches plus all options for newly added pitches
+- weighted choice of a new harmony
+- based on harmony class consonance rankings
+- make sure that
+A.) all the new pitches required to flesh out the new harmony get played by instruments entering
+B.) that all instruments entering have pitches to play
+- frequently results in impossible situations
+    - no allowed harmonies available
+    - one that took me a while to track down: Pitches dropped out, no new pitches are coming in, and the harmony left behind is not allowed
+- nested method of backing out
+- retry assigning pitches to instruments
+- retry picking harmonies
+- retry choosing set of musicians to change state
+- throw out last event and try making a new one
+- throw the whole piece out and start over
+- not efficient, but who cares in this context?
+- toward the end make it more likely an event to be 'stop' until everyone has stopped
+
+# Open questions
+Q: How is this related to what the Echo Nest does?
+A?: As an exercise, it might be beneficial to our general "music intelligence" to imagine alternate models of the internal workings of individual pieces of music. Not that we aren't already engaged in that activity all day everyday.
+
+If you're interested in getting together after hours and making some recordings please contact me.
+
+

@@ -1,0 +1,12 @@
+body {
+  padding-top: 65px;
+  padding-bottom: 5px;
+}
+
+.timer-box {
+    font-size: 24px;
+}
+
+.active-box {
+    color: red;
+}

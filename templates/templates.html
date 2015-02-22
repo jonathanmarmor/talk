@@ -1,1 +1,21 @@
-<!-- placeholder -->
+<script type="underscore/template" id="items-template">
+
+<% _.each(items, function(item, index){ %>
+    <div class="row well timer-box" data-id="<%= index %>">
+        <div class="col-md-4"><%= item.title %></div>
+        <div id="timer-<%= index %>" class="col-md-3"><%= secondsToTime(item.duration * 60) %></div>
+        <div class="col-md-1">
+            <button
+                data-id="<%= index %>"
+                data-duration="<%= item.duration %>"
+                data-running=false
+                data-intervalid="empty"
+                type="button"
+                class="btn btn-default start">
+                    Start
+            </button>
+        </div>
+    </div>
+<% }); %>
+
+</script>
