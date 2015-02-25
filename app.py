@@ -22,6 +22,17 @@ def index():
     return response
 
 
+@app.route('/unrhymed')
+def unrhymed():
+    template = render_template(
+        'unrhymed.html',
+        _=datetime.now().isoformat(),
+    )
+    response = make_response(template)
+    response.cache_control.max_age = 300
+    return response
+
+
 if __name__ == '__main__':
     app.run(
         host='0.0.0.0',
