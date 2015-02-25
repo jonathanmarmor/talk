@@ -1,7 +1,7 @@
 var items = [
-    {'duration': 60, 'title': 'Section 1'},
+    {'duration': 30, 'title': 'Section 1'},
     {'duration': 5, 'title': 'Rest'},
-    {'duration': 60, 'title': 'Section 2'},
+    {'duration': 30, 'title': 'Section 2'},
 ]
 
 
