@@ -1,5 +1,7 @@
 <script type="underscore/template" id="items-template">
 
+<div align="right"><a href="/unrhymed">unrhymed chord</a></div>
+
 <% _.each(items, function(item, index){ %>
     <div class="row well timer-box" data-id="<%= index %>">
         <div class="col-md-4"><%= item.title %></div>
@@ -21,6 +23,8 @@
 </script>
 
 <script type="underscore/template" id="unrhymed-template">
+
+<div align="right"><a href="/">home</a></div>
 
 <% _.each(items, function(item, index){ %>
     <div class="row well timer-box" data-id="<%= index %>">
